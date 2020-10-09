@@ -108,7 +108,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 Usuario objeto = controller.validarLogin(usuario, senha);
                 if (objeto != null) {
                     dispose();//fechar a janela atual
-                    
+
                     TelaPrincipal.usuarioLogado = objeto;
                     TelaPrincipal tela = new TelaPrincipal();
                     tela.setVisible(true);//abrir a tela de Cadastro de Candidatos

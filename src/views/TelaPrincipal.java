@@ -6,15 +6,8 @@ import java.util.logging.Logger;
 import tools.CaixaDeDialogo;
 import models.Usuario;
 
-/**
- *
- * @author Jonas
- */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
     public static Usuario usuarioLogado;
 
     public TelaPrincipal() {
