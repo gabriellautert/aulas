@@ -1,6 +1,7 @@
 package views;
 
 import controllers.UsuarioController;
+import models.Usuario;
 import tools.CaixaDeDialogo;
 
 public class TelaLogin extends javax.swing.JFrame {
@@ -104,11 +105,12 @@ public class TelaLogin extends javax.swing.JFrame {
             if (!usuario.equals("") && !senha.equals("")) {
 
                 UsuarioController controller = new UsuarioController();
-                boolean validacao = controller.validarLogin(usuario, senha);
-                if (validacao) {
+                Usuario objeto = controller.validarLogin(usuario, senha);
+                if (objeto != null) {
                     dispose();//fechar a janela atual
-
-                    CadCandidatos tela = new CadCandidatos();
+                    
+                    TelaPrincipal.usuarioLogado = objeto;
+                    TelaPrincipal tela = new TelaPrincipal();
                     tela.setVisible(true);//abrir a tela de Cadastro de Candidatos
                 } else {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Dados inválidos", 'i');
