@@ -48,7 +48,7 @@ public class BairroController {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE bairros SET nome=?, id_cidade=?, WHERE id=?");
+            stmt = con.prepareStatement("UPDATE bairros SET nome=?, id_cidade=? WHERE id=?");
             stmt.setString(1, objeto.getNome());
             stmt.setInt(2, objeto.getId_cidade());
             stmt.setInt(3, objeto.getId());

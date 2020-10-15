@@ -60,7 +60,7 @@ public class CadBairros extends javax.swing.JFrame {
         getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         lblNomeBairro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNomeBairro.setText("Nome *");
+        lblNomeBairro.setText("Nome do Bairro *");
         getContentPane().add(lblNomeBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 66, -1, -1));
         getContentPane().add(txtNomeBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 88, 180, -1));
 
@@ -80,6 +80,11 @@ public class CadBairros extends javax.swing.JFrame {
         getContentPane().add(btnSalvarBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 191, -1, -1));
 
         btnLimparBairro.setText("LIMPAR");
+        btnLimparBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparBairroActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLimparBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 191, -1, -1));
 
         jtbBairros.setModel(new javax.swing.table.DefaultTableModel(
@@ -183,6 +188,10 @@ public class CadBairros extends javax.swing.JFrame {
             System.out.println("ERRO: " + ex.getMessage().toString());
         }
     }//GEN-LAST:event_btnSalvarBairroActionPerformed
+
+    private void btnLimparBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparBairroActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btnLimparBairroActionPerformed
 
     private boolean validarDados() {
         if (txtNomeBairro.getText().trim().length() == 0) {
