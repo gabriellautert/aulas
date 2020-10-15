@@ -69,7 +69,7 @@ public class CadBairros extends javax.swing.JFrame {
         getContentPane().add(lblCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 128, -1, -1));
 
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 150, 81, -1));
+        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 150, 150, -1));
 
         btnSalvarBairro.setText("SALVAR");
         btnSalvarBairro.addActionListener(new java.awt.event.ActionListener() {
