@@ -95,8 +95,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnBairrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBairrosActionPerformed
-        //CadBairros tela_bairros = new CadBairros();
-        //tela_bairros.setVisible(true);
+        CadBairros tela_bairros = new CadBairros();
+        tela_bairros.setVisible(true);
     }//GEN-LAST:event_mnBairrosActionPerformed
 
     private void mnCandidatosActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_mnCandidatosActionPerformed
