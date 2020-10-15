@@ -1,14 +1,28 @@
 package views;
 
+import controllers.BairroController;
+import models.Bairro;
 import tools.CaixaDeDialogo;
 import tools.Combos;
+import tools.Validacao;
+//import tools.Formatacao;
 
 public class CadBairros extends javax.swing.JFrame {
 
+    Bairro objBairro;
+    BairroController objBairroControle;
     Combos cbCombos;
 
     public CadBairros() {
         initComponents();
+
+        try {
+            cbCombos = new Combos(jcbCidade);
+            cbCombos.preencheCombo("SELECT id, nome, uf FROM cidades ORDER BY nome");
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage());
+        }
+        limparTela();
 
     }
 
@@ -58,6 +72,11 @@ public class CadBairros extends javax.swing.JFrame {
         getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 150, 81, -1));
 
         btnSalvarBairro.setText("SALVAR");
+        btnSalvarBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarBairroActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSalvarBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 191, -1, -1));
 
         btnLimparBairro.setText("LIMPAR");
@@ -74,6 +93,11 @@ public class CadBairros extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbBairros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbBairrosMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbBairros);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 225, 376, 163));
@@ -85,9 +109,128 @@ public class CadBairros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtbBairrosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbBairrosMousePressed
+        try {
+
+            //pega a linha selecionada
+            int linhaSelecionada = jtbBairros.getSelectedRow();
+
+            // Primeira coluna da linha
+            String codigo = jtbBairros.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+            //Verifica se clicou na coluna 2 => EXCLUIR
+            if (jtbBairros.isColumnSelected(2)) {
+                try {
+                    boolean wPergunta = CaixaDeDialogo.obterinstancia()
+                            .pedirConfirmacao("Tem certeza de que deseja excluir?", "", 'p');
+                    if (wPergunta == true) {
+                        //exclusão do registro selecionado
+                    }
+
+                    atualizarTabela();
+
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                }
+            } else {
+                //buscar no banco de dados o registro e preencher nos campos da tela
+                BairroController candController = new BairroController();
+                Bairro objeto = candController.buscarBairro(codigo);
+                if (objeto != null) {
+                    preencherCampos(objeto);
+                }
+            }
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
+        }
+    }//GEN-LAST:event_jtbBairrosMousePressed
+
+    private void btnSalvarBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarBairroActionPerformed
+        try {
+            boolean retorno;
+            //validar os campos
+            retorno = validarDados();
+            if (retorno) {
+
+                objBairro = new Bairro();
+                objBairro.setNome(txtNomeBairro.getText());
+
+                Combos objCombo = (Combos) jcbCidade.getSelectedItem();
+                String id_cidade = objCombo.getCodigo();
+                objBairro.setId_cidade(Integer.parseInt(id_cidade));
+
+                BairroController objBaiController = new BairroController();
+                if (lblId.getText().equals("ID")) {
+                    retorno = objBaiController.incluirBairro(objBairro);
+                } else {
+                    objBairro.setId(Integer.parseInt(lblId.getText()));
+                    retorno = objBaiController.alterarBairro(objBairro);
+                }
+
+                if (retorno == false) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar/incluir", "Erro", "e");
+                } else {
+                    limparTela();
+                }
+
+            }
+
+            atualizarTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao tentar incluir");
+            System.out.println("ERRO: " + ex.getMessage().toString());
+        }
+    }//GEN-LAST:event_btnSalvarBairroActionPerformed
+
+    private boolean validarDados() {
+        if (txtNomeBairro.getText().trim().length() == 0) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um nome corretamente", 'a');
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param args the command line arguments
      */
+    private void limparTela() {
+        try {
+            lblId.setText("ID");
+            txtNomeBairro.setText("");
+            jcbCidade.setSelectedIndex(0);
+
+            atualizarTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
+
+    private void atualizarTabela() {
+        try {
+
+            objBairroControle = new BairroController();
+            objBairroControle.preencherBairro(jtbBairros);
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+
+    private void preencherCampos(Bairro objeto) {
+        try {
+            lblId.setText(String.valueOf(objeto.getId()));
+            txtNomeBairro.setText(objeto.getNome());
+            cbCombos.SetaComboBox(String.valueOf(objeto.getId_cidade()));
+            atualizarTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

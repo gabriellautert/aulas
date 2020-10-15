@@ -4,7 +4,6 @@ import connection.Conexao;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -156,7 +155,7 @@ public class BairroController {
         //return (true);
     }
 
-    public Bairro buscar(String id) {
+    public Bairro buscarBairro(String id) {
         Bairro objBairro = new Bairro();
 
         try {
