@@ -84,7 +84,7 @@ public class BairroController {
             String SQL = "";
             SQL = " SELECT id, nome, id_cidade ";
             SQL += " FROM bairros ";
-            SQL += " ORDER BY nome ";
+            SQL += " ORDER BY id ";
 
             result = Conexao.stmt.executeQuery(SQL);
 
