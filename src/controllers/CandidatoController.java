@@ -15,10 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import models.Candidato;
 
-/**
- *
- * @author Jonas Dhein
- */
 public class CandidatoController {
 
     //Candidato objCandidato;

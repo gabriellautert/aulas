@@ -1,21 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
-/**
- *
- * @author Gabriel
- */
+import tools.CaixaDeDialogo;
+import tools.Combos;
+
 public class CadBairros extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadBairros
-     */
+    Combos cbCombos;
+
     public CadBairros() {
         initComponents();
+
     }
 
     /**
@@ -40,24 +34,34 @@ public class CadBairros extends javax.swing.JFrame {
         lblAviso = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Cadastro de Bairros");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 177, -1));
 
         lblId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblId.setText("ID");
+        getContentPane().add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         lblNomeBairro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNomeBairro.setText("Nome *");
+        getContentPane().add(lblNomeBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 66, -1, -1));
+        getContentPane().add(txtNomeBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 88, 180, -1));
 
         lblCidade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblCidade.setText("Cidade *");
+        getContentPane().add(lblCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 128, -1, -1));
 
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcbCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 150, 81, -1));
 
         btnSalvarBairro.setText("SALVAR");
+        getContentPane().add(btnSalvarBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 191, -1, -1));
 
         btnLimparBairro.setText("LIMPAR");
+        getContentPane().add(btnLimparBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 191, -1, -1));
 
         jtbBairros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,69 +76,11 @@ public class CadBairros extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtbBairros);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 225, 376, 163));
+
         lblAviso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblAviso.setText("Campos com * são obrigatórios");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblId)
-                                    .addComponent(lblNomeBairro)
-                                    .addComponent(lblCidade)
-                                    .addComponent(txtNomeBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 165, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblAviso)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(btnSalvarBairro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLimparBairro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(lblId)
-                .addGap(18, 18, 18)
-                .addComponent(lblNomeBairro)
-                .addGap(6, 6, 6)
-                .addComponent(txtNomeBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblCidade)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvarBairro)
-                    .addComponent(btnLimparBairro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblAviso)
-                .addContainerGap())
-        );
+        getContentPane().add(lblAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 394, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,13 +102,17 @@ public class CadBairros extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadBairros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadBairros.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadBairros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadBairros.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadBairros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadBairros.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadBairros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadBairros.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
