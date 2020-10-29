@@ -121,7 +121,7 @@
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Component id="jcbBairro" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>

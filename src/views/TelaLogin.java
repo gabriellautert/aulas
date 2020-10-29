@@ -1,6 +1,8 @@
 package views;
 
 import controllers.UsuarioController;
+import java.util.Timer;
+import java.util.TimerTask;
 import models.Usuario;
 import tools.CaixaDeDialogo;
 
@@ -11,6 +13,16 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+                
+//        int intervalo = 1000; //intervalo de 1000 milisegundos = 1 segundo a cada chamada do Timer
+//        Timer timer = new Timer();
+//        
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            public void run(){
+//                int tempo = Integer.parseInt(lblTimer.getText().toString()) + (intervalo/1000);
+//                lblTimer.setText(String.valueOf(tempo));
+//            }
+//        }, 0, intervalo);
     }
 
     /**
@@ -27,10 +39,16 @@ public class TelaLogin extends javax.swing.JFrame {
         btnAcessar = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        lblTimer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(33, 150, 243));
         setForeground(new java.awt.Color(33, 150, 243));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Senha");
@@ -51,6 +69,9 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Usuário");
 
+        lblTimer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTimer.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,6 +89,10 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTimer)
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +111,9 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(btnAcessar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTimer)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -98,32 +125,50 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         //validar usuário no banco de dados
-        try {
+        try{
             String usuario = txtUsuario.getText().toString();
             String senha = txtSenha.getText().toString();
-
-            if (!usuario.equals("") && !senha.equals("")) {
-
+            
+            if(!usuario.equals("") && !senha.equals("")){
+            
                 UsuarioController controller = new UsuarioController();
                 Usuario objeto = controller.validarLogin(usuario, senha);
-                if (objeto != null) {
+                if(objeto != null){
                     dispose();//fechar a janela atual
-
+                    
                     TelaPrincipal.usuarioLogado = objeto;
                     TelaPrincipal tela = new TelaPrincipal();
-                    tela.setVisible(true);//abrir a tela de Cadastro de Candidatos
-                } else {
+                    tela.setVisible(true);//abrir a tela principal
+                }else{
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Dados inválidos", 'i');
                 }
-
-            } else {
+            
+            }else{
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Informe conta e senha", 'i');
             }
-
-        } catch (Exception ex) {
+            
+        }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem(ex.getMessage(), 'e');
         }
     }//GEN-LAST:event_btnAcessarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        try{
+            //busca se existe um login recente
+            UsuarioController controller = new UsuarioController();
+            Usuario objeto = controller.buscarLoginRecente();
+            if(objeto != null){
+                dispose();//fechar a janela atual
+
+                TelaPrincipal.usuarioLogado = objeto;
+                TelaPrincipal tela = new TelaPrincipal();
+                tela.setVisible(true);//abrir a tela principal
+            }
+
+        }catch(Exception ex){
+            
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -164,6 +209,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnAcessar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblTimer;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

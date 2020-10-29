@@ -6,8 +6,15 @@ import java.util.logging.Logger;
 import tools.CaixaDeDialogo;
 import models.Usuario;
 
+/**
+ *
+ * @author Jonas
+ */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    /**
+     * Creates new form TelaPrincipal
+     */
     public static Usuario usuarioLogado;
 
     public TelaPrincipal() {
@@ -53,11 +60,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mnCandidatos.setText("Candidatos");
         mnCandidatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    mnCandidatosActionPerformed(evt);
-                } catch (SQLException ex) {
-                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                mnCandidatosActionPerformed(evt);
             }
         });
         jMenu1.add(mnCandidatos);
@@ -77,32 +80,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(425, Short.MAX_VALUE)
-                                .addComponent(lblNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(425, Short.MAX_VALUE)
+                .addComponent(lblNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblNomeUsuario)
-                                .addContainerGap(390, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNomeUsuario)
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnBairrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBairrosActionPerformed
-        CadBairros tela_bairros = new CadBairros();
-        tela_bairros.setVisible(true);
+        //CadBairros tela_bairros = new CadBairros();
+        //tela_bairros.setVisible(true);
     }//GEN-LAST:event_mnBairrosActionPerformed
 
-    private void mnCandidatosActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_mnCandidatosActionPerformed
-        CadCandidatos tela = new CadCandidatos();
+    private void mnCandidatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCandidatosActionPerformed
+        CadCandidatos tela = null;
+        try {
+            tela = new CadCandidatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tela.setVisible(true);
     }//GEN-LAST:event_mnCandidatosActionPerformed
+
 
     private void mnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairActionPerformed
         dispose();
